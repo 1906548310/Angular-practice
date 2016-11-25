@@ -8,7 +8,21 @@
  	<p ng-bind="name"></p>
  	<p ng-bind="firstName"></p>
  	<p>{{name}}{{firstName}}</p>
+ 	<p>{{name + " " + firstName}}</p>
 </div>
 
+<script type="text/javascript">
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.firstName= "John";
+    $scope.lastName= "Doe";
+});
+
+var app = angular.module("myApp",[]);
+app.controller('myCtrl',function($scope) {
+	$scope.firstName = "Mike";
+	$scope.lastName = "Gu";
+})
+</script>
 </body>
 </html>
