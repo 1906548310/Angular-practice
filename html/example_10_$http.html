@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS</title>
+	<script type="text/javascript" src="https://cdn.bootcss.com/angular.js/1.4.8/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+
+<div ng-controller="myCtrl">
+	<p>从服务器传来的信息为：{{myWelcome}}</p>
+</div>
+<div ng-controller="customersCtrl">
+	<ul>
+		<li ng-repeat="x in myData">{{x.Name + ',' + x.Country}}</li>
+	</ul>
+</div>
+
+
+<script>
+	var app = angular.module('myApp',[]);
+	app.controller('myCtrl',function($scope, $http) {
+		$http.get("welcome.htm")
+		.then(function mySuccess(response) {  //请求成功时最什么
+			$scope.myWelcome = response.data;
+		}, function myError(response) {  //请求失败时最什么
+			$scope.myWelcome = response.statusText;
+		});
+	});
+
+	//从服务器获取JSON数据
+	app.controller('customersCtrl',function($scope,$http) {
+		$http.get("customer.php").then(function(response) {
+			$scope.myData = response.data.records;
+		});
+	});
+</script>
+</body>
+</html>

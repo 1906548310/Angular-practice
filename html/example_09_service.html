@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS</title>
+	<script type="text/javascript" src="https://cdn.bootcss.com/angular.js/1.4.8/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+
+<div ng-controller="myCtrl">
+	<p>The url of this page is: <span>{{myUrl}}</span></p>
+	<h2>{{myHeader}}</h2>
+	<h3>当前时间：{{timeNow}}</h3>
+	<h3>自定义Service: <span>{{hex_number}}</span></h3>
+</div>
+
+<script>
+	var app = angular.module('myApp',[]);
+	//创建自己的Service,并在controller参数里面注入
+	app.service('hexafy',function() {
+		this.myFunc = function(x) {
+			return x.toString(16);
+		}
+	});
+	//在Filter中使用自定义服务
+	app.filter('myFormat',['hexafy',
+		function(hexafy) {
+			return function(x) {
+				return hexafy.myFunc(x);
+			}
+		}])
+	app.controller('myCtrl',function($scope, $location, $timeout, $interval, hexafy) {
+		$scope.myUrl = $location.absUrl();
+		$scope.myHeader = "Hello World!";
+		$timeout(function() {
+			$scope.myHeader = "How are you today?";
+		},3000);
+		$scope.timeNow = new Date().toLocaleString();
+		$interval(function() {
+			$scope.timeNow = new Date().toLocaleString();
+		},1000);
+		$scope.hex_number = hexafy.myFunc(255);
+	});
+</script>
+</body>
+</html>
