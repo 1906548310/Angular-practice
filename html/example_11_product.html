@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS</title>
+	<script type="text/javascript" src="https://cdn.bootcss.com/angular.js/1.4.8/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+
+<!-- AngularJS表格 -->
+<div ng-controller="myCtrl_table">
+	<table border="1" width="100%">
+		<tr>
+			<th>Index</th>
+			<th ng-click="orderByThis('name')">Name</th>
+			<th ng-click="orderByThis('country')">Country</th>
+		</tr>
+		<tr ng-repeat="x in messages | orderBy:orderText">
+			<td ng-if="$odd" style="background-color: #eee;">{{$index + 1}}</td>
+			<td ng-if="$even" style="background-color: #fff;">{{$index + 1}}</td>
+			<td ng-if="$odd" style="background-color: #eee;">{{x.name}}</td>
+			<td ng-if="$even" style="background-color: #fff;">{{x.name}}</td>
+			<td ng-if="$odd" style="background-color: #eee;">{{x.country}}</td>
+			<td ng-if="$even" style="background-color: #fff;">{{x.country}}</td>
+		</tr>
+	</table>
+</div>
+<!-- AngularJS表格 -->
+
+<!-- AngularJS下拉列表 -->
+<div ng-controller="myCtrl_select">
+	<!-- 用ng-option实现 -->
+	<select ng-model="selectedName" ng-options="x for x in names"></select>
+	<h2>{{selectedName}}</h2>
+	<!-- 用ng-repeat实现 -->
+	<select>
+		<option>请选择</option>
+		<option ng-repeat="x in names">{{x}}</option>
+	</select>
+	<!-- ng-options vs ng-repeat -->
+	<!-- ng-options相较于ng-repeat，在创建下拉列表时，起码有一个好处： -->
+	<!-- 用ng-options创建的下拉列表，允许下拉元素是一个对象，而ng-repeat不允许，只能是字符串类型 -->
+	<!-- 示范：假如下拉元素是对象 -->
+	<select ng-options="x.model for x in myCars" ng-model="selectedMyCar"></select>
+	<h2>{{selectedMyCar.model}}</h2>
+	<h2>{{selectedMyCar.color}}</h2>
+	<!-- 示范：如果数据源不是数组，而是对象，怎么写？ -->
+	<select ng-options="x for (x,y) in herCars" ng-model="selectedHerCar"></select>
+	<h2>{{selectedHerCar}}</h2>
+</div>
+<!-- AngularJS下拉列表 -->
+
+<script>
+	var app = angular.module('myApp',[]);
+
+	//AngularJS表格👇
+	app.controller('myCtrl_table',function($scope) {
+		$scope.messages = [
+		{name:'Jani',country:'Norway'},
+		{name:'Carl',country:'Sweden'},
+		{name:'Margareth',country:'England'},
+		{name:'Hege',country:'Norway'},
+		{name:'Joe',country:'Denmark'},
+		{name:'Gustav',country:'Sweden'},
+		{name:'Birgit',country:'Denmark'},
+		{name:'Mary',country:'England'},
+		{name:'Kai',country:'Norway'}
+		];
+		
+		$scope.orderByThis = function(xxx) {
+			$scope.orderText = xxx;
+		}
+	});
+
+	//AngularJS下拉列表👇
+	app.controller('myCtrl_select', function($scope) {
+		$scope.names = ["Email", "Tobias", "Linus"];
+		$scope.myCars = [
+		    {model : "Ford Mustang", color : "red"},
+		    {model : "Fiat 500", color : "white"},
+		    {model : "Volvo XC90", color : "black"}
+		];
+		$scope.herCars = {
+		    car01 : "Ford",
+		    car02 : "Fiat",
+		    car03 : "Volvo"
+		};
+	})
+</script>
+</body>
+</html>

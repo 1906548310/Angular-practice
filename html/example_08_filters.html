@@ -19,13 +19,23 @@
 	<hr>
 	<table border="1" width="100%">
 		<tr>
-			<th ng-click="orderByThis('name')">name</th>
-			<th ng-click="orderByThis('country')">country</th>
+			<th>Index</th>
+			<th ng-click="orderByThis('name')">Name</th>
+			<th ng-click="orderByThis('country')">Country</th>
 		</tr>
 		<tr ng-repeat="x in messages | orderBy:orderText">
+			<td ng-if="$odd" style="background-color: #eee;">{{$index + 1}}</td>
+			<td ng-if="$even" style="background-color: #fff;">{{$index + 1}}</td>
+			<td ng-if="$odd" style="background-color: #eee;">{{x.name}}</td>
+			<td ng-if="$even" style="background-color: #fff;">{{x.name}}</td>
+			<td ng-if="$odd" style="background-color: #eee;">{{x.country}}</td>
+			<td ng-if="$even" style="background-color: #fff;">{{x.country}}</td>
+		</tr>
+		<!-- <tr ng-repeat="x in messages | orderBy:orderText" ng-if="$even" style="background-color: #fff;">
+			<td>{{$index + 1}}</td>
 			<td>{{x.name}}</td>
 			<td>{{x.country}}</td>
-		</tr>
+		</tr> -->
 	</table>
 </div>
 
