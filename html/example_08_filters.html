@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS</title>
+	<script type="text/javascript" src="https://cdn.bootcss.com/angular.js/1.4.8/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+
+<div ng-controller="myCtrl">
+	<p>在表达式中使用Filter：{{color | myFormat}}</p>
+	<ul>
+		<li ng-repeat="x in name | orderBy:'name'">在ng-repeat指令中使用Filter：{{x.name + " " + x.country}}</li>
+	</ul>
+	<hr>
+	使用ng-model向后台绑定筛选的字段： <input type="text" name="" ng-model='test'>
+	<ul>
+		<li ng-repeat="y in animals | filter:test">使用filter进行数组筛选：{{y}}</li>
+	</ul>
+	<hr>
+	<table border="1" width="100%">
+		<tr>
+			<th ng-click="orderByThis('name')">name</th>
+			<th ng-click="orderByThis('country')">country</th>
+		</tr>
+		<tr ng-repeat="x in messages | orderBy:orderText">
+			<td>{{x.name}}</td>
+			<td>{{x.country}}</td>
+		</tr>
+	</table>
+</div>
+
+<script>
+	var app = angular.module('myApp',[]);
+
+	//自定义过滤器👇
+	app.filter('myFormat',function() {
+		return function(x) {
+			var txt = x.toLowerCase();
+			return txt;
+		};
+	});
+	//定义一个Controller👇
+	app.controller('myCtrl',function($scope) {
+		$scope.color = 'Blue';
+		$scope.name = [
+			{name:'Mike',country:'Japan'},
+			{name:'Jack',country:'China'},
+			{name:'Jason',country:'America'},
+			{name:'David',country:'Korea'},
+			{name:'Sheldon',country:'German'}
+		];
+		$scope.animals = ['dog','cat','bird','snake','dragon','rabbit'];
+		$scope.messages = [
+		{name:'Jani',country:'Norway'},
+		{name:'Carl',country:'Sweden'},
+		{name:'Margareth',country:'England'},
+		{name:'Hege',country:'Norway'},
+		{name:'Joe',country:'Denmark'},
+		{name:'Gustav',country:'Sweden'},
+		{name:'Birgit',country:'Denmark'},
+		{name:'Mary',country:'England'},
+		{name:'Kai',country:'Norway'}
+		];
+		
+		$scope.orderByThis = function(xxx) {
+			$scope.orderText = xxx;
+		}
+	});
+</script>
+</body>
+</html>

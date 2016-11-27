@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS</title>
+	<script type="text/javascript" src="https://cdn.bootcss.com/angular.js/1.4.8/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+
+<div ng-controller="myCtrl">
+	<p>当在controller里面的时候，优先用$scope，所以此时color值为{{color}}</p>
+</div>
+
+<p>当不在controller里面的时候，找不到$scope，所以只好用$rootscope，所以此时color值为{{color}}</p>
+
+<script>
+	var app = angular.module('myApp',[]);
+	app.run(function($rootScope) {
+		$rootScope.color = 'red';
+	});
+	app.controller('myCtrl',function($scope) {
+		$scope.color = 'blue';
+	});
+</script>
+</body>
+</html>
