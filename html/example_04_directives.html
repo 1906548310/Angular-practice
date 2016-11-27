@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS</title>
+	<script type="text/javascript" src="https://cdn.bootcss.com/angular.js/1.4.8/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp" ng-init="price=5;number=1;things=['apple','lemon','banana','pineapple','orange']">
+购买数量： <input type="text" name="number" ng-model='number'>个<br>	
+商品价格： <input type="text" name="price" ng-model='price'>元<br>
+共计： <span>{{price * number}}元</span>
+
+<h2>ng-repeat</h2>
+<ul>
+	<li ng-repeat="x in things">
+		{{x}}
+	</li>
+</ul>
+
+<h2>自定义Directive</h2>
+<my-first-directive></my-first-directive>
+<div class="my-first-directive"></div>
+<div my-first-directive></div>
+<!-- directive: my-first-directive -->
+
+</div>
+
+
+
+
+<script type="text/javascript">
+var app = angular.module('myApp',[]);
+app.directive('myFirstDirective',function() {
+	return {
+		// restrict : "C",  //如果想通过class引用自定义directive，必须加上这一句
+		// restrict : "M",  //如果是通过注释的方法引入，必须加上这一句，以及下面这句
+		// replace : true,  //为了让注释可见
+		template: "<h3>第一个自定义Directive</h3>"
+	};
+});
+</script>
+</body>
+</html>

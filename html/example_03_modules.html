@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS</title>
+	<script type="text/javascript" src="https://cdn.bootcss.com/angular.js/1.4.8/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+	<p ng-bind="firstName">这里写什么都会被覆盖</p>
+	<p>{{lastName}}</p>
+	<div guqiang-test-directive></div>
+</div>
+
+<script type="text/javascript">
+var app = angular.module("myApp",[]);  //括号里可以用来存放依赖的模块，如果没有这个[]的话，这句话就不是创建一个新的模块，而是取用已存在的模块
+app.controller("myCtrl",function($scope) {
+	$scope.firstName = "Mike";
+	$scope.lastName = "Gu";
+});
+app.directive("guqiangTestDirective",function() {
+	return {
+		template:"I was made in a directive constructor!"
+	}
+});
+</script>
+</body>
+</html>

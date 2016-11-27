@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS</title>
+	<script src="https://cdn.bootcss.com/angular.js/1.4.8/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app='' ng-init='objects = {myColor:"red", name:"guqiang"};arrays = [1,2,3,4,5]'>
+	<input type="text" style="background:{{objects.myColor}};" ng-model='objects.myColor' value="{{objects.myColor}}">
+	<p>This is my master: <span ng-bind="objects.name"></span></p>
+	<p>I followed him when he is {{arrays[0]}}.</p>
+</div>
+
+<script type="text/javascript">
+
+</script>
+</body>
+</html>
