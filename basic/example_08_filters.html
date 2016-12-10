@@ -43,12 +43,12 @@
 	var app = angular.module('myApp',[]);
 
 	//自定义过滤器👇
-	app.filter('myFormat',function() {
+	app.filter('myFormat',[function() {
 		return function(x) {
-			var txt = x.toLowerCase();
+			var txt = x.toUpperCase();
 			return txt;
 		};
-	});
+	}]);
 	//定义一个Controller👇
 	app.controller('myCtrl',function($scope) {
 		$scope.color = 'Blue';

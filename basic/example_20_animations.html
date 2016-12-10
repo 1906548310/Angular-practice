@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>AngularJS动画</title>
+	<style>
+	div {
+	transition: all linear 0.5s;
+	background-color: lightblue;
+	height: 100px;
+	}
+	.ng-hide {
+	height: 0;
+	}
+	</style>
+	<script type="text/javascript" src="https://cdn.bootcss.com/angular.js/1.4.8/angular.min.js"></script>
+	<script src="http://ajax.googleapis.bootcss.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+</head>
+<body ng-app="myApp">
+
+<h1>AngularJS 动画</h1>
+<p>ngAnimate能做什么事？</p>
+<p>1.adds and removes classes.</p>
+<p></p>
+
+<h2>Hide the DIV: <input type="checkbox" ng-model="myCheck"></h2>
+<div ng-hide="myCheck"></div>
+
+<script>
+var app = angular.module('myApp', ['ngAnimate']);
+</script>
+
+</body>
+</html>
